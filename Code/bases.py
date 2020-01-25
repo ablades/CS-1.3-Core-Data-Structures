@@ -8,6 +8,7 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
+string.digits
 
 
 def decode(digits, base):
@@ -18,6 +19,27 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
+    if base is 2:
+        #reverse digit order
+        digits = digits[::-1]
+
+        # Loop through all digits
+        value = 0
+        for exp, digit in enumerate(digits):
+            pow_val = pow(2, exp)
+            digit = int(digit)
+            value += digit * pow_val
+
+        return value
+
+
+
+
+            
+        #Create sum var
+        #get len of digits (determines how many times we need to loop)
+
+        #calculate value of pow(base, expontnt)
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
