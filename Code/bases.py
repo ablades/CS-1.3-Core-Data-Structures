@@ -48,6 +48,25 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
+
+    encoded_val = ""
+
+    while number > 0:
+        #Modulo always returns a value less than the base
+        number, remainder = divmod(number, base)
+
+        encoded_val += str(remainder)
+
+
+    return encoded_val[::-1]
+
+
+
+    #divide a number by the base
+    #take that numbers remainder at every point and add it to the string
+    #repeat until number is zero
+    #flip number
+
     # ...
     # TODO: Encode number in hexadecimal (base 16)
     # ...
