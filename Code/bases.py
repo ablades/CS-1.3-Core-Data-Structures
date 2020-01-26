@@ -1,13 +1,5 @@
-#!python
-
 import string
-# Hint: Use these string constants to encode/decode hexadecimal digits and more
-# string.digits is '0123456789'
-# string.hexdigits is '0123456789abcdefABCDEF'
-# string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
-# string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# string.ascii_letters is ascii_lowercase + ascii_uppercase
-# string.printable is digits + ascii_letters + punctuation + whitespace=
+
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
@@ -19,8 +11,8 @@ def decode(digits, base):
 
     #Reverse digit order
     digits = digits[::-1]
-
     decoded_val = 0
+
     for exp, digit in enumerate(digits):
         #Value of current power with given base and expontent
         pow_val = pow(base, exp)
@@ -47,12 +39,12 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
 
     encoded_val = ""
-
+    
     while number > 0:
         #Modulo always returns a value less than the base
         number, remainder = divmod(number, base)
-        #convert to numbers 10 or higher to letters
-
+        
+        #convert numbers 10 or higher to letters
         if remainder >= 10:
             encoded_val += chr(remainder + 87)
         else:
@@ -70,7 +62,7 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    
+
     #decode values to base 10 then encode to any base
     base10_val = decode(digits, base1)
 
