@@ -54,8 +54,12 @@ def encode(number, base):
     while number > 0:
         #Modulo always returns a value less than the base
         number, remainder = divmod(number, base)
+        #convert to numbers 10 or higher to letters
 
-        encoded_val += str(remainder)
+        if remainder >= 10:
+            encoded_val += chr(remainder + 87)
+        else:
+            encoded_val += str(remainder)
 
 
     return encoded_val[::-1]
