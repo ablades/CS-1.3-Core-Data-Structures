@@ -7,9 +7,7 @@ import string
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
-# string.printable is digits + ascii_letters + punctuation + whitespace
-string.digits
-
+# string.printable is digits + ascii_letters + punctuation + whitespace=
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
@@ -47,7 +45,6 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
 
     encoded_val = ""
 
@@ -61,21 +58,7 @@ def encode(number, base):
         else:
             encoded_val += str(remainder)
 
-
     return encoded_val[::-1]
-
-
-
-    #divide a number by the base
-    #take that numbers remainder at every point and add it to the string
-    #repeat until number is zero
-    #flip number
-
-    # ...
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
 
 
 def convert(digits, base1, base2):
@@ -87,14 +70,11 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+    
+    #decode values to base 10 then encode to any base
+    base10_val = decode(digits, base1)
+
+    return encode(base10_val, base2)
 
 
 def main():
