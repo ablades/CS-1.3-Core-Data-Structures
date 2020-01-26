@@ -26,22 +26,44 @@ def decode(digits, base):
         # Loop through all digits
         value = 0
         for exp, digit in enumerate(digits):
-            pow_val = pow(2, exp)
+            #Get value of current power
+            pow_val = pow(base, exp)
+
             digit = int(digit)
             value += digit * pow_val
 
         return value
+    #Hexidecimal case
+    #97 is the ascii value of a 102 is the ascii value of f
+    elif base is 16:
+        hex_constant = 97
+        #verify all letters are lowercase
+        digits = digits.lower()
+        #reverse digit order
+        digits = digits[::-1]
+        value = 0
+        for exp, digit in enumerate(digits):
+            pow_val = pow(base, exp)
 
+            #use ord() to get value
+            if digit.isalpha():
+                digit = ord(digit) - hex_constant + 10
+            else:
+                digit = int(digit)
 
+            value += digit * pow_val
+
+        return value
+
+            
 
 
             
-        #Create sum var
-        #get len of digits (determines how many times we need to loop)
 
-        #calculate value of pow(base, expontnt)
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
+
+
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
