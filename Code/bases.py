@@ -18,56 +18,25 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    if base is 2:
-        #reverse digit order
-        digits = digits[::-1]
 
-        # Loop through all digits
-        value = 0
-        for exp, digit in enumerate(digits):
-            #Get value of current power
-            pow_val = pow(base, exp)
+    #Reverse digit order
+    digits = digits[::-1]
 
+    decoded_val = 0
+    for exp, digit in enumerate(digits):
+        #Value of current power with given base and expontent
+        pow_val = pow(base, exp)
+
+        #is a hex character 97(a)
+        if digit.isalpha():
+            digit = digit.lower()
+            digit = ord(digit) - 97 + 10
+        else:
             digit = int(digit)
-            value += digit * pow_val
 
-        return value
-    #Hexidecimal case
-    #97 is the ascii value of a 102 is the ascii value of f
-    elif base is 16:
-        hex_constant = 97
-        #verify all letters are lowercase
-        digits = digits.lower()
-        #reverse digit order
-        digits = digits[::-1]
-        value = 0
-        for exp, digit in enumerate(digits):
-            pow_val = pow(base, exp)
+        decoded_val += digit * pow_val
 
-            #use ord() to get value
-            if digit.isalpha():
-                digit = ord(digit) - hex_constant + 10
-            else:
-                digit = int(digit)
-
-            value += digit * pow_val
-
-        return value
-
-            
-
-
-            
-
-    # ...
-    # TODO: Decode digits from hexadecimal (base 16)
-
-
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
-
+    return decoded_val
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
