@@ -69,7 +69,7 @@ def convert(digits, base1, base2):
 
 #Stretch Challenges 
 def radix_convert(number, base):
-    """Convert number in base 10 to digits in given base.
+    """Convert number in base 10 to digits in given base including radix point.
     number: float -- float representation of number (in base 10)
     base: int -- the base to convert to
     return: str -- string representation of number (in given base)"""
@@ -79,8 +79,8 @@ def radix_convert(number, base):
     #truncate number
     number = int(number)
 
-    #value 
-    val = encode(number, base) + "."
+    #get encoded integer value
+    converted_val = encode(number, base) + "."
 
     #continue until decimal begins to repeat
     repeat_val = decimal_val
@@ -89,10 +89,10 @@ def radix_convert(number, base):
 
         #convert values greater than 10 to letters
         if int(result) >= 10:
-            val += chr(int(result) + 87)
+            converted_val += chr(int(result) + 87)
         #add truncated result
         else:
-            val += str(int(result))
+            converted_val += str(int(result))
 
         #keep decimal of result
         decimal_val = result % 1
@@ -100,7 +100,7 @@ def radix_convert(number, base):
         if decimal_val == repeat_val or decimal_val == .0:
             break
 
-    return val
+    return converted_val
 
 
 
