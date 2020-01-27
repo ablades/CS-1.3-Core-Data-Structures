@@ -1,6 +1,6 @@
 #!python
 
-from bases import decode, encode, convert
+from bases import decode, encode, convert, radix_convert
 import unittest
 
 
@@ -264,6 +264,10 @@ class BasesConvertTest(unittest.TestCase):
         assert convert('1110101001100010', 2, 16) == 'ea62'
         assert convert('1111101101110011', 2, 16) == 'fb73'
 
+class RadixConvertTest(unittest.TestCase):
+
+    def test_radix_convert(self):
+        assert radix_convert(12.3125, 2) == '1100.0101'
 
 if __name__ == '__main__':
     unittest.main()

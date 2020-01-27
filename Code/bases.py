@@ -1,6 +1,5 @@
 import string
 
-
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
@@ -68,6 +67,40 @@ def convert(digits, base1, base2):
 
     return encode(base10_val, base2)
 
+#Stretch Challenges 
+def radix_convert(number, base):
+    """Convert number in base 10 to digits in given base.
+    number: float -- float representation of number (in base 10)
+    base: int -- the base to convert to
+    return: str -- string representation of number (in given base)"""
+    #get only decimal value
+    decimal_val = number % 1
+
+    #truncate number
+    number = int(number)
+    #value 
+    val = encode(number, base) + "."
+
+    #continue until decimal begins to repeat
+    repeat_val = decimal_val
+    while True:
+        result = decimal_val * base
+        print(result)
+        #truncate result
+        val += str(int(result))
+        print(val)
+        #keep decimal of result
+        decimal_val = result % 1
+        print(decimal_val)
+        print("-----------")
+        if decimal_val == repeat_val or decimal_val == .0:
+            break
+
+    return val
+
+
+
+
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -83,6 +116,7 @@ def main():
     else:
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
+        radix_convert(12.3125, 2)
 
 
 if __name__ == '__main__':
