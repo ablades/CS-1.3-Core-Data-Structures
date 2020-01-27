@@ -78,6 +78,7 @@ def radix_convert(number, base):
 
     #truncate number
     number = int(number)
+
     #value 
     val = encode(number, base) + "."
 
@@ -85,14 +86,17 @@ def radix_convert(number, base):
     repeat_val = decimal_val
     while True:
         result = decimal_val * base
-        print(result)
-        #truncate result
-        val += str(int(result))
-        print(val)
+
+        #convert values greater than 10 to letters
+        if int(result) >= 10:
+            val += chr(int(result) + 87)
+        #add truncated result
+        else:
+            val += str(int(result))
+
         #keep decimal of result
         decimal_val = result % 1
-        print(decimal_val)
-        print("-----------")
+ 
         if decimal_val == repeat_val or decimal_val == .0:
             break
 
@@ -116,7 +120,6 @@ def main():
     else:
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
-        radix_convert(12.3125, 2)
 
 
 if __name__ == '__main__':
