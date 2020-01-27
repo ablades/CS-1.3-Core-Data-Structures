@@ -268,6 +268,7 @@ class RadixConvertTest(unittest.TestCase):
 
     def test_radix_convert(self):
         assert radix_convert(12.3125, 2) == '1100.0101'
+        assert radix_convert(12.3125, 16) == 'c.5'
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,7 +16,7 @@ def decode(digits, base):
         #Value of current power with given base and expontent
         pow_val = pow(base, exp)
 
-        #is a hex character 97(a)
+        #is a character 97(a)
         if digit.isalpha():
             digit = digit.lower()
             digit = ord(digit) - 97 + 10
