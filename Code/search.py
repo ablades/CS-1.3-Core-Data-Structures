@@ -71,17 +71,19 @@ def binary_search_iterative(array, item):
 def binary_search_recursive(array, item, left=None, right=None):
     
     guess = (left + right) // 2
+
+    #base cases
     if right < left:
         return None
     elif array[guess] == item:
         return guess
 
+    #pass on the work
     if array[guess] < item:
         return binary_search_recursive(array, item, left=guess+1, right=right)
     else:
         return binary_search_recursive(array, item, left=left, right=guess-1)
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+ 
 
 
 if __name__ == "__main__":
