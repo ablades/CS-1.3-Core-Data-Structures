@@ -43,7 +43,52 @@ def binary_search(array, item):
 
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
-    pass
+
+    #Sort array
+    array.sort()
+    low = 0
+    high = len(array) - 1
+
+    while True:
+        #average of low and high
+        guess = (low + high) // 2 
+
+        #High is past low meaning element is not in array
+        if high < low:
+            return None
+        #item is present
+        elif array[guess] == item:
+            return guess
+        
+        #Shift left
+        if array[guess] < item:
+            low = guess + 1
+        #Shift Right
+        else:
+            high = guess - 1
+
+
+
+
+
+    #look at middle element
+    # index = len(array) // 2
+
+    # while item != array[index]:
+    #     #e
+    #     if index == 0 or index == len(array) - 1:
+    #         break
+    #     #look right
+    #     if item > array[index]:
+    #         index += (len(array) - index) // 2
+    #     #look left
+    #     elif item < array[index]:
+    #         index = index // 2
+
+    # return index
+
+
+
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
 
@@ -57,4 +102,4 @@ def binary_search_recursive(array, item, left=None, right=None):
 
 if __name__ == "__main__":
     names = ['Winnie', 'Kojin', 'Brian', 'Nabil', 'Julia', 'Alex', 'Nick']
-    linear_search(names, 'dsa')
+    binary_search(names,'Alex')
