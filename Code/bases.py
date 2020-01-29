@@ -72,7 +72,7 @@ def radix_convert(number, base):
     """Convert number in base 10 to digits in given base including radix point.
     number: float -- float representation of number (in base 10)
     base: int -- the base to convert to
-    return: str -- string representation of number (in given base)"""
+    return: str -- string representation of number (to passed in base)"""
     #get only decimal value
     decimal_val = number % 1
 
@@ -101,6 +101,13 @@ def radix_convert(number, base):
             break
 
     return converted_val
+
+
+def convert_neg_binary(digits, base):
+    """Convert given negative binary number to passed in base base.
+    digits: str -- string representation of a negative binary number
+    base: int -- base to convert to
+    return: str -- string representation of number (to passed in base)"""
 
 
 
