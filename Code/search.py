@@ -2,6 +2,7 @@
 
 def linear_search(array, item):
     """return the first index of item in array or None if item is not found"""
+    #Time Complexity O(n)
     # implement linear_search_iterative and linear_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
     #return linear_search_iterative(array, item)
@@ -35,6 +36,7 @@ def linear_search_recursive(array, item, index=0):
 
 def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
+    #Time Complexity O(log n)
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
     #return binary_search_iterative(array, item)
@@ -84,8 +86,3 @@ def binary_search_recursive(array, item, left=None, right=None):
     else:
         return binary_search_recursive(array, item, left=left, right=guess-1)
  
-
-
-if __name__ == "__main__":
-    names = ['Winnie', 'Kojin', 'Brian', 'Nabil', 'Julia', 'Alex', 'Nick']
-    binary_search(names,'Alex')
