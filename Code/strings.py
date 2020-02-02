@@ -4,7 +4,26 @@ def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
+    
+    if pattern == '':
+        return True
+
+    for index, char in enumerate(text):
+        #look for matching first character
+        if char == pattern[0]:
+            #compare to pattern
+            for letter in pattern:
+                #
+                if index > len(text) - 1 or text[index] != letter:
+                    break
+                #increment index
+                index += 1
+            #is a match
+            else:
+                return True
+
+    return False
+
 
 
 def find_index(text, pattern):
