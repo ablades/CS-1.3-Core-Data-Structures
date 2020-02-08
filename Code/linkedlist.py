@@ -56,7 +56,8 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: Best and Worst case are both O(N)
+        every node must be traversed."""
         # Node counter initialized to zero
         node_count = 0
         # Start at the head node
@@ -68,31 +69,65 @@ class LinkedList(object):
             # Skip to the next node
             node = node.next
         # Now node_count contains the number of nodes
+
+        self.size = node_count
         return node_count
 
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) item is the first element.
+        Worst case running time: O(N) item is the last element or not in list"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+
+        node = self.head
+        i = 0
+        while i != index:
+            node = node.next
+            i += 1
+
+        return node.data
+
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: insertion at head or tail O(1)
+        Worst case running time: at the end O(N) must loop through entire LL """
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+
+        #inserting into empty LL
+        if self.is_empty() or index == 0:
+            self.prepend(item)
+
+        #insert at tail
+        elif index == self.size:
+            self.append(item)
+        #insertion at any other point
+        else:
+            node = self.head
+            i = 0
+            while i < index:
+                node = node.next
+                i += 1
+
+            #create node and point it to next in sequence
+            new_node = Node(item)
+            new_node.next = node.next
+
+            #point exisiting node to new node
+            node.next = new_node
+            
+            self.size += 1
+
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) insert using tail pointer at end of LL"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -105,9 +140,11 @@ class LinkedList(object):
         # Update tail to new node regardless
         self.tail = new_node
 
+        self.size += 1
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) insert using head pointer at beginning of LL"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -119,6 +156,8 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -141,16 +180,25 @@ class LinkedList(object):
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Find the node containing the given old_item and replace its
-        # data with new_item, without creating a new node object
-        pass
+        Best case running time: O(1) item is head
+        Worst case running time: O(N) item is near end of LL"""
+
+        node = self.head
+        while node is not None:
+
+            if node.data == old_item:
+                node.data = new_item
+                return
+            #increment
+            node = node.next
+
+        #occurs if old item was not found
+        raise ValueError('Old item not found: {}'.format(old_item))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: item is at beginning of LL O(1)
+        Worst case running time: Item is at end of LL O(N)"""
         # Start at the head node
         node = self.head
         # Keep track of the node before the one containing the given item
@@ -169,6 +217,7 @@ class LinkedList(object):
                 node = node.next
         # Check if we found the given item or we never did and reached the tail
         if found:
+            self.size -= 1
             # Check if we found a node in the middle of this linked list
             if node is not self.head and node is not self.tail:
                 # Update the previous node to skip around the found node
