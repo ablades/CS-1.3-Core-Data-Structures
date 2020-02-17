@@ -14,7 +14,7 @@ def decode(digits, base):
 
     for exp, digit in enumerate(digits):
         #Value of current power with given base and expontent
-        pow_val = pow(base, exp)
+        pow_val = base ** exp
 
         #is a character 97(a)
         if digit.isalpha():
