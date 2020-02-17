@@ -1,5 +1,51 @@
 #!python
 
+
+def refactor(text, pattern, func):
+    """Return a boolean indicating whether pattern occurs in text."""
+    assert isinstance(text, str), 'text is not a string: {}'.format(text)
+    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    #return appropriate func
+    if pattern == '':
+        if func == 'contains':
+            return True
+        elif func == 'find_index':
+            return 0
+        else:
+            return []
+    
+    occurrences = []
+    for index, char in enumerate(text):
+        
+        if char == pattern[0]:
+            j = index
+            #Compare to pattern
+            for letter in pattern:
+                #Bounds checking
+                if j > len(text) - 1 or text [j] != letter:
+                        break
+                #Increment index
+                j += 1
+            #matching substring
+            else:
+                if func == 'contains':
+                    return True
+                elif func == 'find_index':
+                    return index
+                else:
+                    occurrences.append(index)
+    #Final returns
+    if func == 'contains':
+        return False
+    elif func == 'find_index':
+        return None
+    else:
+        return occurrences
+                    
+                        
+    
+
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
