@@ -108,7 +108,7 @@ def convert_neg_binary(digits, base):
     digits: str -- string representation of a negative binary number
     base: int -- base to convert to
     return: str -- string representation of number (to passed in base)"""
-
+    pass
 
 
 
