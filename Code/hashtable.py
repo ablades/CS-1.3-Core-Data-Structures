@@ -25,13 +25,13 @@ class HashTable(object):
 
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Calculate load factor
-        # return ...
+        Best and worst case running time: Best case assuming we know size and length of buckets already O(1) 
+        If we have to calculate the size or the buckets then it becomes O(b) + O(n) where b = buckets, n = items"""
+        return self.size / len(self.buckets)
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(n) where n is all items in buckets must iterate over entire hashtable"""
         # Collect all keys in each of the buckets
         all_keys = []
         for bucket in self.buckets:
