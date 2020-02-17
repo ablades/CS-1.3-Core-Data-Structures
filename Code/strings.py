@@ -33,7 +33,7 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     if pattern == '':
-        return None
+        return 0
     
     for i, char in enumerate(text):
         if char == pattern[0]:
