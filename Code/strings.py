@@ -1,59 +1,62 @@
 #!python
 
 
-def refactor(text, pattern, func):
-    """Refactor code to be dry"""
-    assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+# def refactor(text, pattern, func):
+#     """Refactor code to be dry"""
+#     assert isinstance(text, str), 'text is not a string: {}'.format(text)
+#     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
-    occurrences = []
-    for index, char in enumerate(text):
+#     occurrences = []
+#     for index, char in enumerate(text):
 
-        #Empty String Base
-        if pattern == '':
-            if func == 'contains':
-                return True
-            elif func == 'find_index':
-                return 0
-            elif func == 'find_all_indexes':
-                occurrences.append(index)
-                continue
+#         #Empty String Base
+#         if pattern == '':
+#             if func == 'contains':
+#                 return True
+#             elif func == 'find_index':
+#                 return 0
+#             elif func == 'find_all_indexes':
+#                 occurrences.append(index)
+#                 continue
         
-        #Potential Pattern
-        if char == pattern[0]:
-            j = index
-            #Compare to pattern
-            for letter in pattern:
-                #Bounds checking
-                if j > len(text) - 1 or text [j] != letter:
-                        break
-                #Increment index
-                j += 1
-            #matching substring
-            else:
-                if func == 'contains':
-                    return True
-                elif func == 'find_index':
-                    return index
-                elif func == 'find_all_indexes':
-                    occurrences.append(index)
-    #Final returns
-    if func == 'contains':
-        return False
-    elif func == 'find_index':
-        return None
-    elif func == 'find_all_indexes':
-        return occurrences
+#         #Potential Pattern
+#         if char == pattern[0]:
+#             j = index
+#             #Compare to pattern
+#             for letter in pattern:
+#                 #Bounds checking
+#                 if j > len(text) - 1 or text [j] != letter:
+#                         break
+#                 #Increment index
+#                 j += 1
+#             #matching substring
+#             else:
+#                 if func == 'contains':
+#                     return True
+#                 elif func == 'find_index':
+#                     return index
+#                 elif func == 'find_all_indexes':
+#                     occurrences.append(index)
+#     #Final returns
+#     if func == 'contains':
+#         return False
+#     elif func == 'find_index':
+#         return None
+#     elif func == 'find_all_indexes':
+#         return occurrences
                     
                         
     
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
-    return refactor(text, pattern, 'contains')
-    # assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    # assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-
+    assert isinstance(text, str), 'text is not a string: {}'.format(text)
+    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+    
+    if find_all_indexes(text, pattern) or pattern == '':
+        return True
+    else:
+        return False
     # if pattern == '':
     #     return True
 
@@ -75,29 +78,28 @@ def contains(text, pattern):
 
 
 
-def find_index(text, pattern):
+def find_index(text, pattern, index=0):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found.
     O(N*M) where n is length of text and M is the length of the pattern"""
-    return refactor(text, pattern, 'find_index')
-    # assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    # assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # if pattern == '':
-    #     return 0
+    assert isinstance(text, str), 'text is not a string: {}'.format(text)
+    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    if pattern == '':
+        return index
     
-    # for i, char in enumerate(text):
-    #     if char == pattern[0]:
-    #         j = i
-    #         for letter in pattern:
-    #             if j > len(text) - 1 or  text[j] != letter:
-    #                 break
+    while index < len(text):
+        if text[index]  == pattern[0]:
+            j = index
+            for letter in pattern:
+                if j > len(text) - 1 or text[j] != letter:
+                    break
+                j += 1
+            else:
+                return index
 
-    #             j += 1
-    #         #pattern matches
-    #         else:
-    #             return i
-
-    # return None
+        index += 1
+    return None
 
 
 def find_all_indexes(text, pattern):
@@ -105,12 +107,24 @@ def find_all_indexes(text, pattern):
     or an empty list if not found.
     O(N*M) where n is length of text and M is the length of the pattern
     """
-    return refactor(text, pattern, 'find_all_indexes')
-    # assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    # assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+    assert isinstance(text, str), 'text is not a string: {}'.format(text)
+    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
-    # occurrences = []
 
+    occurrences = []
+    i = 0
+    while i < len(text):
+        index = find_index(text,pattern, i)
+
+        if index is not None:
+            occurrences.append(index)
+            i = index
+        
+        i += 1
+    
+        index = None
+            
+    return occurrences
     # for i, char in enumerate(text):
     #     #all characters are part of pattern
     #     if pattern == '':
