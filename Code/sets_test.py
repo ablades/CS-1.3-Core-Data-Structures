@@ -62,23 +62,43 @@ class SetTest(unittest.TestCase):
         s1 = Set(['A', 'B', 'C', 'D'])
         s2 = Set(['E', 'F', 'G', 'H'])
         s3 = s1.union(s2)
-        assert s3.contains('A')
-        assert s3.contains('B')
-        assert s3.contains('C')
-        assert s3.contains('D')
-        assert s3.contains('E')
-        assert s3.contains('F')
-        assert s3.contains('G')
-        assert s3.contains('H')
+        assert s3.contains('A') == True
+        assert s3.contains('B') == True
+        assert s3.contains('C') == True
+        assert s3.contains('D') == True
+        assert s3.contains('E') == True
+        assert s3.contains('F') == True
+        assert s3.contains('G') == True
+        assert s3.contains('H') == True
         assert s3.size() == 8
 
     def test_intersection(self):
         s1 = Set(['A', 'B', 'C', 'D'])
         s2 = Set(['C', 'D', 'G', 'H'])
         s3 = s1.intersection(s2)
-        assert s3.contains('D')
-        assert s3.contains('C')
+        assert s3.contains('D') == True
+        assert s3.contains('C') == True
         assert s3.size() == 2
+
+    def test_difference(self):
+        s1 = Set(['A', 'B', 'C', 'D'])
+        s2 = Set(['C', 'D', 'G', 'H'])
+        s3 = s1.difference(s2)
+        assert s3.contains('A') == True
+        assert s3.contains('B') == True
+        assert s3.contains('G') == True
+        assert s3.contains('H') == True
+        assert s3.size() == 4
+
+    def test_is_subset(self):
+        s1 = Set(['A', 'B', 'C', 'D'])
+        s2 = Set(['C', 'D'])
+        s3 = Set(['A', 'B'])
+        s4 = Set(['E', 'F'])
+
+        assert s1.is_subset(s2) == True
+        assert s1.is_subset(s3) == True
+        assert s1.is_subset(s4) == False
         
 
 if __name__ == '__main__':

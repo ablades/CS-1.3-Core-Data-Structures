@@ -52,7 +52,7 @@ class Set(object):
     def intersection(self, other_set):
         """ - return a new set that is the intersection of this set and other_set"""
         new_set = Set()
-        
+
         for item in self.ht.keys():
             if other_set.contains(item):
                 new_set.add(item)
@@ -60,11 +60,28 @@ class Set(object):
         for item in other_set.ht.keys():
             if self.contains(item):
                 new_set.add(item)
+
+        return new_set
   
 
 
     def difference(self, other_set):
         """ - return a new set that is the difference of this set and other_set"""
-        pass
+        new_set = Set()
+        for item in self.ht.keys():
+            if other_set.contains(item) == False:
+                new_set.add(item)
+        
+        for item in other_set.ht.keys():
+            if self.contains(item) == False:
+                new_set.add(item)
+
+        return new_set
+
     def is_subset(self, other_set): 
         """return a boolean indicating whether other_set is a subset of this set"""
+        for item in other_set.ht.keys():
+            if self.contains(item) == False:
+                return False
+        
+        return True
