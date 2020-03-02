@@ -4,7 +4,7 @@ from hashtable import HashTable
 class Set(object):
 
     def __init__(self, elements=None):
-        """ - initialize a new empty set structure, and add each element if a sequence is given"""
+        """initialize a new empty set structure, and add each element if a sequence is given"""
         
         if elements is not None:
             self.ht = HashTable(len(elements))
@@ -16,15 +16,15 @@ class Set(object):
             self.ht = HashTable()
 
     def size(self):
-        """ - property that tracks the number of elements in constant time"""
+        """property that tracks the number of elements in constant time"""
         return self.ht.size
 
     def contains(self, element):
-        """ - return a boolean indicating whether element is in this set"""
+        """return a boolean indicating whether element is in this set"""
         return self.ht.contains(element)
 
     def add(self, element):
-        """ - add element to this set, if not present already"""
+        """add element to this set, if not present already"""
         #item already exists
         if self.ht.contains(element):
             return False
@@ -38,7 +38,7 @@ class Set(object):
 
 
     def union(self, other_set):
-        """ - return a new set that is the union of this set and other_set"""
+        """return a new set that is the union of this set and other_set"""
         new_set = Set()
 
         for item in self.ht.keys():
@@ -50,7 +50,7 @@ class Set(object):
         return new_set
 
     def intersection(self, other_set):
-        """ - return a new set that is the intersection of this set and other_set"""
+        """return a new set that is the intersection of this set and other_set"""
         new_set = Set()
 
         for item in self.ht.keys():
@@ -66,11 +66,8 @@ class Set(object):
 
 
     def difference(self, other_set):
-        """ - return a new set that is the difference of this set and other_set"""
+        """return a new set that is the difference of this set and other_set"""
         new_set = Set()
-        for item in self.ht.keys():
-            if other_set.contains(item) == False:
-                new_set.add(item)
         
         for item in other_set.ht.keys():
             if self.contains(item) == False:
