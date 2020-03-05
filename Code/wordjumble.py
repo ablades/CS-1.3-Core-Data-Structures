@@ -8,15 +8,6 @@ def calc_val(word, key_word):
 
     return value
 
-def build_dict(words):
-    word_dict = {}
-
-    for word in words:
-        word_dict[word] = read_words(word)
-
-    return word_dict
-
-
 
 
 def read_words(input_list):
@@ -30,11 +21,13 @@ def read_words(input_list):
     #read in all keywords
     for key_word in input_list:
         words = list()
-        #
+
+        #loop through main dictionary
         for word in word_list:
+            #calculate values and compare length of potential matches
             if len(word) == len(key_word) and calc_val(key_word, key_word) == calc_val(word, key_word):
                 words.append(word)
-
+        
         master_dictonary[key_word] = words
 
     return master_dictonary
