@@ -1,9 +1,13 @@
 
 def calc_val(word, key_word):
     value = 0
+    word = sorted(word)
+    key_word = sorted(key_word)
     #calculate value for each letter in word using ascii
     for char in word:
+
         if char in key_word:
+            key_word = key_word[1:]
             value += ord(char)
 
     return value
@@ -27,7 +31,7 @@ def read_words(input_list):
             #calculate values and compare length of potential matches
             if len(word) == len(key_word) and calc_val(key_word, key_word) == calc_val(word, key_word):
                 words.append(word)
-        
+
         master_dictonary[key_word] = words
 
     return master_dictonary
@@ -35,7 +39,3 @@ def read_words(input_list):
 
 if __name__ == "__main__":
     print(read_words(["tefon", "ogod","laisa", "laurr", "bureek", "prouot"]))
-    # dict()
-    # with open("/usr/share/dict/words") as f: 
-    #     for line in f.readlines():
-    #         print(len(str(line)))
