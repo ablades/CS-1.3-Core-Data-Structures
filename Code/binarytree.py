@@ -170,19 +170,17 @@ class BinarySearchTree(object):
         parent = None
         # Loop until we descend past the closest leaf node
         while node is not None:
-            if node.data == item:
+            if item == node.data:
                 # Return the parent of the found node
                 return parent
-
             elif item < node.data:
                 # Update the parent and descend to the node's left child
-                parent = node.left
-                node = parent
-
+                parent = node
+                node = node.left
             elif item > node.data:
                 # Update the parent and descend to the node's right child
-                parent = node.right
-                node = parent
+                parent = node
+                node = node.right
         # Not found
         return parent
 

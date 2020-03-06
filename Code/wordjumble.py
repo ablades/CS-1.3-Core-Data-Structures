@@ -1,3 +1,4 @@
+import time
 
 def calc_val(word, key_word):
     value = 0
@@ -38,4 +39,7 @@ def read_words(input_list):
 
 
 if __name__ == "__main__":
-    print(read_words(["tefon", "ogod","laisa", "laurr", "bureek", "prouot"]))
+    print("Seconds since epoch =", round(time.time()))
+    #print(read_words(["tefon"]))
+    print(read_words(["tefon", "ogod","laisa", "laurr", "ogod", "bureek", "prouot"]))
+    print("Seconds since epoch =", round(time.time()))	
